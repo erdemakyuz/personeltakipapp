@@ -16,7 +16,7 @@ class _ListScreenState extends State<ListScreen> {
         actions: [
           GestureDetector(
               onTap: () {
-                openDetayScreen();
+                openDetayScreen(context);
               },
               child: Padding(
                   padding: EdgeInsets.only(right: 20),
@@ -28,6 +28,7 @@ class _ListScreenState extends State<ListScreen> {
         padding: EdgeInsets.only(bottom: 15, right: 15),
         child: FloatingActionButton(
             heroTag: "button1", //Birden fazla kullanımında istiyor.
+            backgroundColor: Colors.blue,
             onPressed: () {
               openDetayScreen(context);
             },
