@@ -15,7 +15,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.yellow,
+        color: Colors.white,
+        padding: EdgeInsets.all(20),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,9 +28,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Kullanıcı Adı'),
                 ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextField(
+                  controller: passwordController,
+                  obscureText: true, //Şifre için metnin gizlenmesini sağlar.
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Kullanıcı Şifre'),
+                ),
+              ),
+              SizedBox(height: 20),
+              OutlinedButton.icon(
+                icon: Icon(
+                  Icons.account_box,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  'Kullanıcı Giriş Yap',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.blue)),
+                onPressed: () {
+                  girisYap();
+                },
               )
             ]),
       ),
     );
   }
+
+  void girisYap() {}
 }
