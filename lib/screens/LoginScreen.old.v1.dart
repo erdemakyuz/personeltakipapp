@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -94,31 +92,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void girisYap(BuildContext context) {
-    //Klavyeyi Kapat
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
     if (usernameController.text == 'admin' &&
         passwordController.text == '123456') {
-      saveLogin();
       Navigator.pushReplacementNamed(context, "/List");
     } else {
       EasyLoading.showToast('Kullanıcı adı ve/veya şifreniz hatalıdır !');
     }
-  }
-
-  Future<void> saveLogin() async {
-    SharedPreferences shared = await SharedPreferences.getInstance();
-    shared.setString("Username", beniHatirla ? usernameController.text : "");
-    shared.setString("Password", beniHatirla ? passwordController.text : "");
-    shared.setBool("BeniHatirla", beniHatirla);
-  }
-
-  void loadLogin() async {
-    SharedPreferences shared = await SharedPreferences.getInstance();
-    beniHatirla = await shared.getBool("BeniHatirla") ?? false;
-    if (beniHatirla) {
-      usernameController.text = await shared.getString("Username") ?? "";
-      passwordController.text = await shared.getString("Password") ?? "";
-    }
-    setState(() {});
   }
 }
