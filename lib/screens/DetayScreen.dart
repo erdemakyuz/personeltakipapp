@@ -13,6 +13,17 @@ class _DetayScreenState extends State<DetayScreen> {
   TextEditingController cinsiyetController = TextEditingController();
   TextEditingController dogumTarihiController = TextEditingController();
 
+  Future<void> selectDogumTarihi(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(1970),
+        lastDate: DateTime.now());
+    if (pickedDate != null) {
+      dogumTarihiController.text = pickedDate.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +68,14 @@ class _DetayScreenState extends State<DetayScreen> {
               Padding(
                 padding: EdgeInsets.all(5),
                 child: TextField(
+                  showCursor: false, //imleci gösterme
+                  readOnly: true, //readonly yap
+                  enableInteractiveSelection:
+                      false, //tıklanmaya bağlı renklendirme yapma
                   controller: dogumTarihiController,
+                  onTap: () {
+                    selectDogumTarihi(context);
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Doğum Tarihi',
