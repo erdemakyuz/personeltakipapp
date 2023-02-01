@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:personeltakipapp/screens/DetayScreen.dart';
 import 'package:personeltakipapp/screens/ListScreen.dart';
 import 'package:personeltakipapp/screens/LoginScreen.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": ((context) => const LoginScreen()),
         "/List": ((context) => const ListScreen()),
+        "/Detay": ((context) => const DetayScreen()),
       },
     );
   }
