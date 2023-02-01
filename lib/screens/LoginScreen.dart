@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -74,14 +75,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.blue)),
                       onPressed: () {
-                        girisYap();
+                        girisYap(context);
                       },
                     )
-                  ])
+                  ]),
+              SizedBox(height: 50),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Şifremi Unuttum',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))
             ]),
       ),
     );
   }
 
-  void girisYap() {}
+  void girisYap(BuildContext context) {
+    if (usernameController.text == 'admin' &&
+        passwordController.text == '123456') {
+      Navigator.pushReplacementNamed(context, "/List");
+    } else {
+      EasyLoading.showToast('Kullanıcı adı ve/veya şifreniz hatalıdır !');
+    }
+  }
 }
