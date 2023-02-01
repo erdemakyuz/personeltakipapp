@@ -21,6 +21,12 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Container(
+                height: 100,
+                width: 200,
+                child: Image.asset('lib/assets/images/bursakart-burulas.png'),
+              ),
+              SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.all(5),
                 child: TextField(
