@@ -19,6 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
   bool beniHatirla = false;
 
   @override
+  void initState() {
+    //form_load öncesi initcomponent, formcreate gibi
+    super.initState();
+    loadLogin();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
