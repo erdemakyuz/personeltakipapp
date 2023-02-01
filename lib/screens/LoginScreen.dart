@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,8 +9,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController usernameController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController usernameController =
+      new TextEditingController(text: 'admin');
+  TextEditingController passwordController =
+      new TextEditingController(text: '123456');
+  bool beniHatirla = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,21 +51,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              OutlinedButton.icon(
-                icon: Icon(
-                  Icons.account_box,
-                  color: Colors.white,
-                ),
-                label: Text(
-                  'Kullanıcı Giriş Yap',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                onPressed: () {
-                  girisYap();
-                },
-              )
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FlutterSwitch(
+                        value: beniHatirla,
+                        onToggle: (value) {
+                          beniHatirla = value;
+                          setState(() {});
+                        }),
+                    OutlinedButton.icon(
+                      icon: Icon(
+                        Icons.account_box,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        'Kullanıcı Giriş Yap',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue)),
+                      onPressed: () {
+                        girisYap();
+                      },
+                    )
+                  ])
             ]),
       ),
     );
