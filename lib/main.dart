@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:personeltakipapp/screens/DetayScreen.dart';
 import 'package:personeltakipapp/screens/ListScreen.dart';
 import 'package:personeltakipapp/screens/LoginScreen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [const Locale('tr', 'TR')],
       builder: EasyLoading.init(),
       initialRoute: "/",
       routes: {
