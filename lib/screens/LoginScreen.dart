@@ -8,6 +8,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController usernameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +22,11 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(),
+                child: TextField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Kullanıcı Adı'),
+                ),
               )
             ]),
       ),
