@@ -28,7 +28,7 @@ class DBHelper {
     return await openDatabase(path, version: 1, onCreate: _createDb);
   }
 
-  //Database dosyası ilk oluşturulduğunda onCreate çalışır.
+  //Database dosyası ilk defa oluşturulduğunda onCreate çalışır.
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE PERSONEL(ID INTEGER PRIMARY KEY AUTOINCREMENT, TCKIMLIKNO TEXT, ADSOYAD TEXT, CINSIYET TEXT, DOGUMTARIHI TEXT)");
@@ -36,6 +36,7 @@ class DBHelper {
 
   Future<int?> insertPersonel(PersonelModel model) async {
     Database? db = await this.db;
+    //db.execute("insert into PERSONEL(TCKIMLIKNO,ADISOYADI) values('${model.ADISOYADI}','${model.TCKIMLIKNO}')");
     return await db?.insert("PERSONEL", model.toMap());
   }
 }
