@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 import 'package:personeltakipapp/helpers/UtilsHelper.dart';
+import 'package:personeltakipapp/model/PersonelModel.dart';
 
 class DetayScreen extends StatefulWidget {
   const DetayScreen({super.key});
@@ -14,7 +17,7 @@ class _DetayScreenState extends State<DetayScreen> {
   TextEditingController adSoyadController = TextEditingController();
   TextEditingController cinsiyetController = TextEditingController();
   TextEditingController dogumTarihiController = TextEditingController();
-
+  DateTime? selectedDate; //Seçili tarihi DateTime almak için kullandık.
   Future<void> selectDogumTarihi(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
         context: context,
@@ -22,6 +25,7 @@ class _DetayScreenState extends State<DetayScreen> {
         firstDate: new DateTime(1970),
         lastDate: DateTime.now());
     if (pickedDate != null) {
+      selectedDate = pickedDate;
       dogumTarihiController.text =
           DateHelper.GetString(pickedDate, "dd.MM.yyyy");
     }
@@ -65,9 +69,22 @@ class _DetayScreenState extends State<DetayScreen> {
         });
   }
 
-  void personelKaydet() {
+  void personelKaydet(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       //Kaydet
+      var model = new PersonelModel();
+      model.TCKIMLIKNO = tcKimlikController.text;
+      model.ADISOYADI = adSoyadController.text;
+      model.DOGUMTARIHI = selectedDate;
+      model.CINSIYET = cinsiyetController.text;
+      DBHelper().insertPersonel(model).then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Personel kayedildi.')));
+        Navigator.pop(context);
+      }).catchError((onError) {
+        //hata mesajını gösterebiliriz.
+        EasyLoading.showError('Personel Kaydedilemedi');
+      });
     }
   }
 
