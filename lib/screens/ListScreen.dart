@@ -22,6 +22,7 @@ class _ListScreenState extends State<ListScreen> {
   void refreshData() {
     EasyLoading.show(status: "Liste Yükleniyor...");
     DBHelper().getPersonelList().then((value) {
+      EasyLoading.dismiss();
       personelListe = value;
       setState(() {});
     });
@@ -35,7 +36,7 @@ class _ListScreenState extends State<ListScreen> {
         actions: [
           GestureDetector(
               onTap: () {
-                openDetayScreen(context);
+                openDetayScreen(context, null);
               },
               child: Padding(
                   padding: EdgeInsets.only(right: 20),
@@ -59,14 +60,18 @@ class _ListScreenState extends State<ListScreen> {
             heroTag: "button1", //Birden fazla kullanımında istiyor.
             backgroundColor: Colors.blue,
             onPressed: () {
-              openDetayScreen(context);
+              openDetayScreen(context, null);
             },
             child: Icon(Icons.add)),
       ),
     );
   }
 
-  void openDetayScreen(BuildContext context) {
-    Navigator.pushNamed(context, "/Detay");
+  Future<void> openDetayScreen(
+      BuildContext context, PersonelModel? model) async {
+    final result = await Navigator.pushNamed(context, "/Detay");
+    if (result != null && result == true) {
+      refreshData();
+    }
   }
 }

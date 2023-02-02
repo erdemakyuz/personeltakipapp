@@ -80,7 +80,7 @@ class _DetayScreenState extends State<DetayScreen> {
       DBHelper().insertPersonel(model).then((value) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Personel kaydedildi.')));
-        Navigator.pop(context);
+        Navigator.pop(context, true);
       }).catchError((onError) {
         //hata mesajını gösterebiliriz.
         EasyLoading.showError('Personel Kaydedilemedi.' + onError.toString());
