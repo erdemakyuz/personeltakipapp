@@ -95,7 +95,17 @@ class _DetayScreenState extends State<DetayScreen> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'T.C. Kimlik No',
-                              prefixIcon: Icon(Icons.card_membership)),
+                              prefixIcon:
+                                  Icon(Icons.card_membership), //sol icon
+                              suffixIcon:
+                                  tcKimlikController.text.isNotEmpty //sağ ikon
+                                      ? IconButton(
+                                          icon: Icon(Icons.clear_outlined),
+                                          onPressed: () {
+                                            tcKimlikController.text = "";
+                                          },
+                                        )
+                                      : null),
                           validator: (value) {
                             if (value!.trim().isEmpty) {
                               return "T.C. Kimlik No boş olamaz";
