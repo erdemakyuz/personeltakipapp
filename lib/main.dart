@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Yükleniyor ekranda çıktığında ekranın kalan boşluklarını kitlemesi için eklendi.
+    //Yükleniyor ekranda çıktığında ekranın kalan boşluklarını kitlemesi için eklendi. s
     //Mask
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
     return MaterialApp(
