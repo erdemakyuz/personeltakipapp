@@ -69,93 +69,95 @@ class _DetayScreenState extends State<DetayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Personel Detay")),
-      body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextFormField(
-                  //Validation kullanacaksak TextFormField gerekiyor.
-                  controller: tcKimlikController,
-                  keyboardType: TextInputType.number, //Aktif klavye görünümü
-                  maxLength: 11,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'T.C. Kimlik No',
-                      prefixIcon: Icon(Icons.card_membership)),
-                  validator: (value) {
-                    if (value!.trim().isEmpty) {
-                      return "T.C. Kimlik No boş olamaz";
-                    }
-                    if (value.trim().length != 11) {
-                      return "T.C. Kimlik No 11 rakamdan oluşmalıdır.";
-                    }
-                    if (UtilsHelper.isTCKimlikNo(int.parse(value.trim())) ==
-                        false) {
-                      return "Lütfen geçerli bir T.C. Kimlik No giriniz.";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextField(
-                  controller: adSoyadController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Adı Soyadı',
-                      prefixIcon: Icon(Icons.account_box_outlined)),
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextField(
-                  controller: cinsiyetController,
-                  readOnly: true,
-                  showCursor: false,
-                  enableInteractiveSelection: false,
-                  onTap: (() {
-                    selectCinsiyet(context);
-                  }),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Cinsiyet',
-                      prefixIcon: Icon(Icons.person)),
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextField(
-                  showCursor: false, //imleci gösterme
-                  readOnly: true, //readonly yap
-                  enableInteractiveSelection:
-                      false, //tıklanmaya bağlı renklendirme yapma
-                  controller: dogumTarihiController,
-                  onTap: () {
-                    selectDogumTarihi(context);
-                  },
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Doğum Tarihi',
-                      prefixIcon: Icon(Icons.calendar_month)),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                  width: MediaQuery.of(context)
-                      .size
-                      .width, //Ekranın size ini almak için kullanıyoruz.
-                  child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.save),
-                      label: Text('Personel Kaydet')))
-            ],
-          )),
+      body: SingleChildScrollView(
+          child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextFormField(
+                      //Validation kullanacaksak TextFormField gerekiyor.
+                      controller: tcKimlikController,
+                      keyboardType:
+                          TextInputType.number, //Aktif klavye görünümü
+                      maxLength: 11,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'T.C. Kimlik No',
+                          prefixIcon: Icon(Icons.card_membership)),
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return "T.C. Kimlik No boş olamaz";
+                        }
+                        if (value.trim().length != 11) {
+                          return "T.C. Kimlik No 11 rakamdan oluşmalıdır.";
+                        }
+                        if (UtilsHelper.isTCKimlikNo(int.parse(value.trim())) ==
+                            false) {
+                          return "Lütfen geçerli bir T.C. Kimlik No giriniz.";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextField(
+                      controller: adSoyadController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Adı Soyadı',
+                          prefixIcon: Icon(Icons.account_box_outlined)),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextField(
+                      controller: cinsiyetController,
+                      readOnly: true,
+                      showCursor: false,
+                      enableInteractiveSelection: false,
+                      onTap: (() {
+                        selectCinsiyet(context);
+                      }),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Cinsiyet',
+                          prefixIcon: Icon(Icons.person)),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextField(
+                      showCursor: false, //imleci gösterme
+                      readOnly: true, //readonly yap
+                      enableInteractiveSelection:
+                          false, //tıklanmaya bağlı renklendirme yapma
+                      controller: dogumTarihiController,
+                      onTap: () {
+                        selectDogumTarihi(context);
+                      },
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Doğum Tarihi',
+                          prefixIcon: Icon(Icons.calendar_month)),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                      width: MediaQuery.of(context)
+                          .size
+                          .width, //Ekranın size ini almak için kullanıyoruz.
+                      child: ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.save),
+                          label: Text('Personel Kaydet')))
+                ],
+              ))),
     );
   }
 }
