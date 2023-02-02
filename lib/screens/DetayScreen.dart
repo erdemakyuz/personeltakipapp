@@ -83,7 +83,7 @@ class _DetayScreenState extends State<DetayScreen> {
         Navigator.pop(context);
       }).catchError((onError) {
         //hata mesajını gösterebiliriz.
-        EasyLoading.showError('Personel Kaydedilemedi');
+        EasyLoading.showError('Personel Kaydedilemedi.' + onError.toString());
       });
     }
   }

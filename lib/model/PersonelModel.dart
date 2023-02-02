@@ -8,6 +8,8 @@ class PersonelModel {
   String? CINSIYET;
   DateTime? DOGUMTARIHI;
 
+  PersonelModel() {}
+
   PersonelModel.fromObject(dynamic json) {
     ID = json['ID'];
     TCKIMLIKNO = json['TCKIMLIKNO'];
