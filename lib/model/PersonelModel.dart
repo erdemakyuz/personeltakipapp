@@ -1,3 +1,4 @@
+import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 
 class PersonelModel {
@@ -6,6 +7,17 @@ class PersonelModel {
   String? ADISOYADI;
   String? CINSIYET;
   DateTime? DOGUMTARIHI;
+
+  PersonelModel.fromObject(dynamic json) {
+    ID = json['ID'];
+    TCKIMLIKNO = json['TCKIMLIKNO'];
+    ADISOYADI = json['ADISOYADI'];
+    CINSIYET = json['CINSIYET'];
+    DOGUMTARIHI = json['DOGUMTARIHI'] == null
+        ? null
+        : DateHelper.GetDate(
+            json['DOGUMTARIHI'].toString(), "YYYY-MM-DD HH:MM:SS.SSS");
+  }
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
