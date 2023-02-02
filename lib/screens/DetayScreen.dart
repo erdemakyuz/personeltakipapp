@@ -27,7 +27,6 @@ class _DetayScreenState extends State<DetayScreen> {
   }
 
   final List<String> cinsiyetList = ['ERKEK', 'KADIN'];
-  String selectedCinsiyet = "";
   Future selectCinsiyet(BuildContext context) {
     return showDialog(
         context: context,
@@ -45,10 +44,12 @@ class _DetayScreenState extends State<DetayScreen> {
                         .map((e) => RadioListTile(
                               title: Text(e),
                               value: e,
-                              groupValue: selectedCinsiyet,
-                              selected: selectedCinsiyet == e,
+                              groupValue: cinsiyetController.text,
+                              selected: cinsiyetController.text == e,
                               onChanged: (value) {
-                                selectedCinsiyet = value.toString();
+                                cinsiyetController.text = value.toString();
+                                setState(() {});
+                                Navigator.of(dcontext).pop();
                               },
                             ))
                         .toList(),
