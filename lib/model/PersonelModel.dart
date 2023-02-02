@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 
@@ -30,5 +31,9 @@ class PersonelModel {
         ? null
         : DateHelper.GetString(DOGUMTARIHI!, "YYYY-MM-DD HH:MM:SS.SSS");
     return data;
+  }
+
+  Widget toView() {
+    return Container(child: Text(ADISOYADI ?? ""));
   }
 }
