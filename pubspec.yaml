@@ -40,6 +40,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   shared_preferences: ^2.0.17
   flutter_localization: ^0.1.10
+  sqflite: ^2.2.4+1
+  path_provider: ^2.0.12
 
 dev_dependencies:
   flutter_test:
