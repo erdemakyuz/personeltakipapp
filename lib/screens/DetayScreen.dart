@@ -192,7 +192,7 @@ class _DetayScreenState extends State<DetayScreen> {
                               .width, //Ekranın size ini almak için kullanıyoruz.
                           child: ElevatedButton.icon(
                               onPressed: () {
-                                personelKaydet();
+                                personelKaydet(context);
                               },
                               icon: Icon(Icons.save),
                               label: Text('Personel Kaydet')))
