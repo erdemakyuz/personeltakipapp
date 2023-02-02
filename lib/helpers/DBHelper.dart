@@ -24,14 +24,14 @@ class DBHelper {
   //Database dosyasına erişmek için kullanılır.
   Future<Database> initializeDb() async {
     Directory dir = await getTemporaryDirectory();
-    String path = dir.path + "burulas001.db";
+    String path = dir.path + "burulas002.db";
     return await openDatabase(path, version: 1, onCreate: _createDb);
   }
 
   //Database dosyası ilk defa oluşturulduğunda onCreate çalışır.
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        "CREATE TABLE PERSONEL(ID INTEGER PRIMARY KEY AUTOINCREMENT, TCKIMLIKNO TEXT, ADSOYAD TEXT, CINSIYET TEXT, DOGUMTARIHI TEXT)");
+        "CREATE TABLE PERSONEL(ID INTEGER PRIMARY KEY AUTOINCREMENT, TCKIMLIKNO TEXT, ADISOYADI TEXT, CINSIYET TEXT, DOGUMTARIHI TEXT)");
   }
 
   Future<int?> insertPersonel(PersonelModel model) async {

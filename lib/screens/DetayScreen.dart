@@ -79,7 +79,7 @@ class _DetayScreenState extends State<DetayScreen> {
       model.CINSIYET = cinsiyetController.text;
       DBHelper().insertPersonel(model).then((value) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Personel kayedildi.')));
+            .showSnackBar(SnackBar(content: Text('Personel kaydedildi.')));
         Navigator.pop(context);
       }).catchError((onError) {
         //hata mesajını gösterebiliriz.
