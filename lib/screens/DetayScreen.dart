@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personeltakipapp/helpers/DateHelper.dart';
 
 class DetayScreen extends StatefulWidget {
   const DetayScreen({super.key});
@@ -20,8 +21,42 @@ class _DetayScreenState extends State<DetayScreen> {
         firstDate: new DateTime(1970),
         lastDate: DateTime.now());
     if (pickedDate != null) {
-      dogumTarihiController.text = pickedDate.toString();
+      dogumTarihiController.text =
+          DateHelper.GetString(pickedDate, "dd.MM.yyyy");
     }
+  }
+
+  final List<String> cinsiyetList = ['ERKEK', 'KADIN'];
+  String selectedCinsiyet = "";
+  Future selectCinsiyet(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (dcontext) {
+          var dialog = AlertDialog(
+            title: Text('Cinsiyet Seçiniz'),
+            content: SingleChildScrollView(
+              //Telefon boyutuna göre sığmama durumu ile karşılaşmamak için SingleChildScrollView kullandık.
+              child: Container(
+                  width: double
+                      .infinity, //Alert ekranı widthini ayarlamak için kullanıyoruz.
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: cinsiyetList
+                        .map((e) => RadioListTile(
+                              title: Text(e),
+                              value: e,
+                              groupValue: selectedCinsiyet,
+                              selected: selectedCinsiyet == e,
+                              onChanged: (value) {
+                                selectedCinsiyet = value.toString();
+                              },
+                            ))
+                        .toList(),
+                  )),
+            ),
+          );
+          return dialog;
+        });
   }
 
   @override
@@ -58,6 +93,12 @@ class _DetayScreenState extends State<DetayScreen> {
                 padding: EdgeInsets.all(5),
                 child: TextField(
                   controller: cinsiyetController,
+                  readOnly: true,
+                  showCursor: false,
+                  enableInteractiveSelection: false,
+                  onTap: (() {
+                    selectCinsiyet(context);
+                  }),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Cinsiyet',
