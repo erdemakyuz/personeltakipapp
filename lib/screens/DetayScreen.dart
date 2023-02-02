@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
+import 'package:personeltakipapp/helpers/UtilsHelper.dart';
 
 class DetayScreen extends StatefulWidget {
   const DetayScreen({super.key});
@@ -42,7 +43,11 @@ class _DetayScreenState extends State<DetayScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: cinsiyetList
                         .map((e) => RadioListTile(
-                              title: Text(e),
+                              title: Row(children: [
+                                Icon(e == "ERKEK" ? Icons.male : Icons.female),
+                                SizedBox(width: 20),
+                                Text(e)
+                              ]),
                               value: e,
                               groupValue: cinsiyetController.text,
                               selected: cinsiyetController.text == e,
@@ -70,12 +75,28 @@ class _DetayScreenState extends State<DetayScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  //Validation kullanacaksak TextFormField gerekiyor.
                   controller: tcKimlikController,
+                  keyboardType: TextInputType.number, //Aktif klavye görünümü
+                  maxLength: 11,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'T.C. Kimlik No',
                       prefixIcon: Icon(Icons.card_membership)),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return "T.C. Kimlik No boş olamaz";
+                    }
+                    if (value.trim().length != 11) {
+                      return "T.C. Kimlik No 11 rakamdan oluşmalıdır.";
+                    }
+                    if (UtilsHelper.isTCKimlikNo(int.parse(value.trim())) ==
+                        false) {
+                      return "Lütfen geçerli bir T.C. Kimlik No giriniz.";
+                    }
+                    return null;
+                  },
                 ),
               ),
               SizedBox(height: 20),
