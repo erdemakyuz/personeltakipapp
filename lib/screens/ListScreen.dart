@@ -20,11 +20,12 @@ class _ListScreenState extends State<ListScreen> {
   }
 
   void refreshData() {
-    EasyLoading.show(status: "Liste Yükleniyor...");
-    DBHelper().getPersonelList().then((value) {
-      EasyLoading.dismiss();
-      personelListe = value;
-      setState(() {});
+    EasyLoading.show(status: "Liste Yükleniyor...").then((value) {
+      DBHelper().getPersonelList().then((value) {
+        EasyLoading.dismiss();
+        personelListe = value;
+        setState(() {});
+      });
     });
   }
 
@@ -47,7 +48,11 @@ class _ListScreenState extends State<ListScreen> {
         color: Colors.white,
         child: ListView.separated(
             itemBuilder: (extd, index) {
-              return personelListe![index].toView();
+              return GestureDetector(
+                  onTap: () {
+                    openDetayScreen(context, personelListe![index]);
+                  },
+                  child: personelListe![index].toView());
             },
             separatorBuilder: (sep, index) {
               return Divider();
@@ -69,6 +74,7 @@ class _ListScreenState extends State<ListScreen> {
 
   Future<void> openDetayScreen(
       BuildContext context, PersonelModel? model) async {
+    //Eğer DetayScreen den true dönersek liste yenilenecek, değilse aynen kalacak
     final result = await Navigator.pushNamed(context, "/Detay");
     if (result != null && result == true) {
       refreshData();
