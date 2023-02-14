@@ -25,13 +25,58 @@ class DBHelper {
   Future<Database> initializeDb() async {
     Directory dir = await getTemporaryDirectory();
     String path = dir.path + "burulas003.db";
-    return await openDatabase(path, version: 1, onCreate: _createDb);
+    return await openDatabase(path,
+        version: 3, onCreate: _createDb, onUpgrade: _onUpgrade);
+  }
+
+  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    //Yeni bir field eklenmesi gerekiyorsa versiyon kontrolü yapılarak ekleniyor.
+    if (oldVersion < 2) {
+      if (!await columnExists(db, "PERSONEL", "TELEFON")) {
+        await db.execute("ALTER TABLE PERSONEL ADD COLUMN TELEFON TEXT");
+      }
+    }
+    if (oldVersion < 3) {
+      if (!await columnExists(db, "PERSONEL", "RESIMYOLU")) {
+        await db.execute("ALTER TABLE PERSONEL ADD COLUMN RESIMYOLU TEXT");
+      }
+    }
   }
 
   //Database dosyası ilk defa oluşturulduğunda onCreate çalışır.
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE PERSONEL(ID INTEGER PRIMARY KEY AUTOINCREMENT, TCKIMLIKNO TEXT, ADISOYADI TEXT, CINSIYET TEXT, DOGUMTARIHI TEXT)");
+    _onUpgrade(db, 0, newVersion);
+  }
+
+  Future<bool> tableExists(Database db, String name) async {
+    var result = await db.rawQuery(
+        "SELECT count(*) AS Result FROM sqlite_master WHERE type='table' AND name='" +
+            name +
+            "'",
+        null);
+
+    if (result[0]["Result"] != null &&
+        int.parse(result[0]["Result"].toString()) > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> columnExists(
+      Database db, String tableName, String columnName) async {
+    if (await tableExists(db, tableName)) {
+      var result =
+          await db.rawQuery("PRAGMA table_info(" + tableName + ")", null);
+      for (var column in result) {
+        if (column.values.first == columnName) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   //Personel Model İşlemleri
