@@ -18,7 +18,7 @@ class PersonelModel {
     DOGUMTARIHI = json['DOGUMTARIHI'] == null
         ? null
         : DateHelper.GetDate(
-            json['DOGUMTARIHI'].toString(), "YYYY-MM-DD HH:MM:SS.SSS");
+            json['DOGUMTARIHI'].toString(), "yyyy-MM-dd HH:mm:ss");
   }
 
   Map<String, dynamic> toMap() {
@@ -28,7 +28,7 @@ class PersonelModel {
     data['CINSIYET'] = this.CINSIYET;
     data['DOGUMTARIHI'] = DOGUMTARIHI == null
         ? null
-        : DateHelper.GetString(DOGUMTARIHI!, "YYYY-MM-DD HH:MM:SS.SSS");
+        : DateHelper.GetString(DOGUMTARIHI!, "yyyy-MM-dd HH:mm:ss");
     return data;
   }
 

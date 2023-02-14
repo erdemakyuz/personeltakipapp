@@ -24,7 +24,7 @@ class DBHelper {
   //Database dosyasına erişmek için kullanılır.
   Future<Database> initializeDb() async {
     Directory dir = await getTemporaryDirectory();
-    String path = dir.path + "burulas002.db";
+    String path = dir.path + "burulas003.db";
     return await openDatabase(path, version: 1, onCreate: _createDb);
   }
 
