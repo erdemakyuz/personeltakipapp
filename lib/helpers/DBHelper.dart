@@ -41,6 +41,13 @@ class DBHelper {
     return await db?.insert("PERSONEL", model.toMap());
   }
 
+  Future<int?> updatePersonel(PersonelModel model) async {
+    Database? db = await this.db;
+    //db.execute("insert into PERSONEL(TCKIMLIKNO,ADISOYADI) values('${model.ADISOYADI}','${model.TCKIMLIKNO}')");
+    return await db?.update(
+        "PERSONEL", where: "ID= ?", whereArgs: [model.ID], model.toMap());
+  }
+
   Future<List<PersonelModel>> getPersonelList() async {
     List<PersonelModel> liste = List<PersonelModel>.empty(growable: true);
     Database? db = await this.db;

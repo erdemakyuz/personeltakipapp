@@ -88,19 +88,31 @@ class _DetayScreenState extends State<DetayScreen> {
   void personelKaydet(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       //Kaydet
-      var model = new PersonelModel();
+      var model = this.PersonelItem ?? new PersonelModel();
       model.TCKIMLIKNO = tcKimlikController.text;
       model.ADISOYADI = adSoyadController.text;
       model.DOGUMTARIHI = selectedDate;
       model.CINSIYET = cinsiyetController.text;
-      DBHelper().insertPersonel(model).then((value) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Personel kaydedildi.')));
-        Navigator.pop(context, true);
-      }).catchError((onError) {
-        //hata mesajını gösterebiliriz.
-        EasyLoading.showError('Personel Kaydedilemedi.' + onError.toString());
-      });
+
+      if (this.PersonelItem != null) {
+        DBHelper().updatePersonel(model).then((value) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Personel kaydedildi.')));
+          Navigator.pop(context, true);
+        }).catchError((onError) {
+          //hata mesajını gösterebiliriz.
+          EasyLoading.showError('Personel Kaydedilemedi.' + onError.toString());
+        });
+      } else {
+        DBHelper().insertPersonel(model).then((value) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Personel kaydedildi.')));
+          Navigator.pop(context, true);
+        }).catchError((onError) {
+          //hata mesajını gösterebiliriz.
+          EasyLoading.showError('Personel Kaydedilemedi.' + onError.toString());
+        });
+      }
     }
   }
 
