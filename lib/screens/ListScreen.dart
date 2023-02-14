@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/model/PersonelModel.dart';
+import 'package:personeltakipapp/screens/DetayScreen.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -75,9 +76,20 @@ class _ListScreenState extends State<ListScreen> {
   Future<void> openDetayScreen(
       BuildContext context, PersonelModel? model) async {
     //Eğer DetayScreen den true dönersek liste yenilenecek, değilse aynen kalacak
-    final result = await Navigator.pushNamed(context, "/Detay");
-    if (result != null && result == true) {
-      refreshData();
+
+    if (model == null) {
+      final result = await Navigator.pushNamed(context, "/Detay");
+      if (result != null && result == true) {
+        refreshData();
+      }
+    } else {
+      final result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: ((context) => DetayScreen(PersonelItem: model))));
+      if (result != null && result == true) {
+        refreshData();
+      }
     }
   }
 }

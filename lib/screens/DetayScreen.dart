@@ -6,13 +6,29 @@ import 'package:personeltakipapp/helpers/UtilsHelper.dart';
 import 'package:personeltakipapp/model/PersonelModel.dart';
 
 class DetayScreen extends StatefulWidget {
-  const DetayScreen({super.key});
+  final PersonelModel? PersonelItem;
+  const DetayScreen({super.key, required this.PersonelItem});
 
   @override
-  State<DetayScreen> createState() => _DetayScreenState();
+  State<DetayScreen> createState() => _DetayScreenState(PersonelItem);
 }
 
 class _DetayScreenState extends State<DetayScreen> {
+  //Personel bilgisini taşımak için kullanılıyor.
+  final PersonelModel? PersonelItem;
+  _DetayScreenState(this.PersonelItem) {
+    if (this.PersonelItem != null) {
+      tcKimlikController.text = PersonelItem?.TCKIMLIKNO ?? "";
+      adSoyadController.text = PersonelItem?.ADISOYADI ?? "";
+      cinsiyetController.text = PersonelItem?.CINSIYET ?? "";
+      if (PersonelItem?.DOGUMTARIHI != null) {
+        dogumTarihiController.text =
+            DateHelper.GetString(PersonelItem!.DOGUMTARIHI!, "dd.MM.yyyy");
+        selectedDate = PersonelItem!.DOGUMTARIHI!;
+      }
+    }
+  }
+
   TextEditingController tcKimlikController = TextEditingController();
   TextEditingController adSoyadController = TextEditingController();
   TextEditingController cinsiyetController = TextEditingController();

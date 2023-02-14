@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personeltakipapp/helpers/DBHelper.dart';
-import 'package:personeltakipapp/helpers/DateHelper.dart';
+import '../helpers/DateHelper.dart';
 
 class PersonelModel {
   int? ID;
