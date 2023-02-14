@@ -34,7 +34,10 @@ class _ListScreenState extends State<ListScreen> {
   void showActionSheet(BuildContext ctx, PersonelModel model) {
     showCupertinoDialog(
         context: ctx,
-        builder: (builder) => CupertinoActionSheet(
+        barrierDismissible: true,
+        builder: (builder) => Align(
+            alignment: Alignment.bottomCenter,
+            child: CupertinoActionSheet(
               message: Text("Lütfen seçim yapınız !"),
               actions: [
                 CupertinoActionSheetAction(
@@ -62,7 +65,7 @@ class _ListScreenState extends State<ListScreen> {
                   style: TextStyle(color: Colors.red),
                 ),
               ),
-            ));
+            )));
   }
 
   @override
