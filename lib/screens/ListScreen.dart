@@ -45,20 +45,14 @@ class _ListScreenState extends State<ListScreen> {
                     onPressed: () {
                       Navigator.of(ctx).pop();
                       //tel: diye yazınca aramaya gidiyor.
-                      var url = "tel:${model.TELEFON}";
-                      if (canLaunchUrlString(url) == true) {
-                        launchUrlString("tel:${model.TELEFON}");
-                      }
+                      launchUrlString("tel:${model.TELEFON}");
                     },
                     child: Text('Personel Telefon Et')),
                 CupertinoActionSheetAction(
                     onPressed: () {
                       Navigator.of(ctx).pop();
                       //sms: diye yazınca aramaya gidiyor.
-                      var url = "sms:${model.TELEFON}";
-                      if (canLaunchUrlString(url) == true) {
-                        launchUrlString("sms:${model.TELEFON}");
-                      }
+                      launchUrlString("sms:${model.TELEFON}");
                     },
                     child: Text('Personel SMS Gönder')),
                 CupertinoActionSheetAction(
