@@ -22,7 +22,7 @@ class _QRScreenState extends State<QRScreen> {
         child: Align(
             alignment: Alignment.center,
             child: QrImage(
-              data: this.PersonelItem?.TCKIMLIKNO ?? "",
+              data: "tel:${(this.PersonelItem?.TELEFON ?? "")}",
               version: QrVersions.auto,
               size: 350,
               foregroundColor: Colors.black,
