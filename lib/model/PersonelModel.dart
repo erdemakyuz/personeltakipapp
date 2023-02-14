@@ -7,6 +7,8 @@ class PersonelModel {
   String? ADISOYADI;
   String? CINSIYET;
   DateTime? DOGUMTARIHI;
+  String? TELEFON;
+  String? RESIMYOLU;
 
   PersonelModel() {}
 
@@ -15,6 +17,8 @@ class PersonelModel {
     TCKIMLIKNO = json['TCKIMLIKNO'];
     ADISOYADI = json['ADISOYADI'];
     CINSIYET = json['CINSIYET'];
+    TELEFON = json['TELEFON'];
+    RESIMYOLU = json['RESIMYOLU'];
     DOGUMTARIHI = json['DOGUMTARIHI'] == null
         ? null
         : DateHelper.GetDate(
@@ -26,6 +30,8 @@ class PersonelModel {
     data['TCKIMLIKNO'] = this.TCKIMLIKNO;
     data['ADISOYADI'] = this.ADISOYADI;
     data['CINSIYET'] = this.CINSIYET;
+    data['TELEFON'] = this.TELEFON;
+    data['RESIMYOLU'] = this.RESIMYOLU;
     data['DOGUMTARIHI'] = DOGUMTARIHI == null
         ? null
         : DateHelper.GetString(DOGUMTARIHI!, "yyyy-MM-dd HH:mm:ss");

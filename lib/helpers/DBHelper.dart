@@ -47,6 +47,7 @@ class DBHelper {
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE PERSONEL(ID INTEGER PRIMARY KEY AUTOINCREMENT, TCKIMLIKNO TEXT, ADISOYADI TEXT, CINSIYET TEXT, DOGUMTARIHI TEXT)");
+    //Create işleminden sonrada varsa updateleri mutlaka çalıştırıyoruz.
     _onUpgrade(db, 0, newVersion);
   }
 

@@ -33,6 +33,7 @@ class _DetayScreenState extends State<DetayScreen> {
   TextEditingController adSoyadController = TextEditingController();
   TextEditingController cinsiyetController = TextEditingController();
   TextEditingController dogumTarihiController = TextEditingController();
+  TextEditingController telefonController = TextEditingController();
   DateTime? selectedDate; //Seçili tarihi DateTime almak için kullandık.
   Future<void> selectDogumTarihi(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -91,6 +92,7 @@ class _DetayScreenState extends State<DetayScreen> {
       var model = this.PersonelItem ?? new PersonelModel();
       model.TCKIMLIKNO = tcKimlikController.text;
       model.ADISOYADI = adSoyadController.text;
+      model.TELEFON = telefonController.text;
       model.DOGUMTARIHI = selectedDate;
       model.CINSIYET = cinsiyetController.text;
 
@@ -211,6 +213,17 @@ class _DetayScreenState extends State<DetayScreen> {
                               border: OutlineInputBorder(),
                               labelText: 'Doğum Tarihi',
                               prefixIcon: Icon(Icons.calendar_month)),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextField(
+                          controller: telefonController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Cep Telefonu',
+                              prefixIcon: Icon(Icons.phone)),
                         ),
                       ),
                       SizedBox(height: 20),
