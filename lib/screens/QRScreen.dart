@@ -6,7 +6,7 @@ class QRScreen extends StatefulWidget {
   const QRScreen({super.key, required this.PersonelItem});
 
   @override
-  State<QRScreen> createState() => _QRScreenState();
+  State<QRScreen> createState() => _QRScreenState(this.PersonelItem);
 }
 
 class _QRScreenState extends State<QRScreen> {
