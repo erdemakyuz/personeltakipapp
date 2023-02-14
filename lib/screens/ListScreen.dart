@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
@@ -30,6 +31,40 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  void showActionSheet(BuildContext ctx, PersonelModel model) {
+    showCupertinoDialog(
+        context: ctx,
+        builder: (builder) => CupertinoActionSheet(
+              message: Text("Lütfen seçim yapınız !"),
+              actions: [
+                CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text('Personel Telefon Et')),
+                CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text('Personel SMS Gönder')),
+                CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text('Personel QR Code')),
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: Text(
+                  'Vazgeç',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +87,9 @@ class _ListScreenState extends State<ListScreen> {
               return GestureDetector(
                   onTap: () {
                     openDetayScreen(context, personelListe![index]);
+                  },
+                  onLongPress: () {
+                    showActionSheet(context, personelListe![index]);
                   },
                   child: personelListe![index].toView());
             },
