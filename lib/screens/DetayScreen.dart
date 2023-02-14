@@ -21,6 +21,7 @@ class _DetayScreenState extends State<DetayScreen> {
       tcKimlikController.text = PersonelItem?.TCKIMLIKNO ?? "";
       adSoyadController.text = PersonelItem?.ADISOYADI ?? "";
       cinsiyetController.text = PersonelItem?.CINSIYET ?? "";
+      telefonController.text = PersonelItem?.TELEFON ?? "";
       if (PersonelItem?.DOGUMTARIHI != null) {
         dogumTarihiController.text =
             DateHelper.GetString(PersonelItem!.DOGUMTARIHI!, "dd.MM.yyyy");
