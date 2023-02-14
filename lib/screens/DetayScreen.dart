@@ -125,7 +125,7 @@ class _DetayScreenState extends State<DetayScreen> {
   Widget build(BuildContext context) {
     //Telefon bilgisinin belli bir formatta girilmesi için eklendi (Mask)
     var maskFormatter = new MaskTextInputFormatter(
-        mask: '0 (###) ###-##-##',
+        mask: '0 (###) ### ## ##',
         filter: {"#": RegExp(r'[0-9]')},
         type: MaskAutoCompletionType.lazy);
     return Scaffold(
