@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 import 'package:personeltakipapp/helpers/UtilsHelper.dart';
@@ -122,6 +123,11 @@ class _DetayScreenState extends State<DetayScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    //Telefon bilgisinin belli bir formatta girilmesi için eklendi (Mask)
+    var maskFormatter = new MaskTextInputFormatter(
+        mask: '0 (###) ###-##-##',
+        filter: {"#": RegExp(r'[0-9]')},
+        type: MaskAutoCompletionType.lazy);
     return Scaffold(
       appBar: AppBar(title: Text("Personel Detay")),
       body: SingleChildScrollView(
@@ -221,6 +227,7 @@ class _DetayScreenState extends State<DetayScreen> {
                         padding: EdgeInsets.all(5),
                         child: TextField(
                           controller: telefonController,
+                          inputFormatters: [maskFormatter],
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Cep Telefonu',
