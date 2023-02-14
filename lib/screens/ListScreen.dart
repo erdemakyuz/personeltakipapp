@@ -4,7 +4,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/model/PersonelModel.dart';
 import 'package:personeltakipapp/screens/DetayScreen.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ListScreen extends StatefulWidget {
