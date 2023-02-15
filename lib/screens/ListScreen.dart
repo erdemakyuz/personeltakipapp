@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
@@ -80,6 +81,14 @@ class _ListScreenState extends State<ListScreen> {
             )));
   }
 
+  Future<void> readBarcode(BuildContext context) async {
+    String result = await FlutterBarcodeScanner.scanBarcode(
+        "#ff6666", "Vazgeç", true, ScanMode.QR);
+    if (result.isNotEmpty) {
+      print(result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,11 +97,12 @@ class _ListScreenState extends State<ListScreen> {
         actions: [
           GestureDetector(
               onTap: () {
-                openDetayScreen(context, null);
+                //openDetayScreen(context, null);
+                readBarcode(context);
               },
               child: Padding(
                   padding: EdgeInsets.only(right: 20),
-                  child: Icon(Icons.add_circle, color: Colors.white)))
+                  child: Icon(Icons.qr_code_2, color: Colors.white)))
         ],
       ),
       body: Container(
