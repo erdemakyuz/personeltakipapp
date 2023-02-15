@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
@@ -153,11 +156,13 @@ class _DetayScreenState extends State<DetayScreen> {
                 CupertinoActionSheetAction(
                     onPressed: () {
                       Navigator.of(ctx).pop();
+                      selectImageFromGallery();
                     },
                     child: Text('Galeri')),
                 CupertinoActionSheetAction(
                     onPressed: () {
                       Navigator.of(ctx).pop();
+                      selectImageFromCamera();
                     },
                     child: Text('Kamera')),
               ],
@@ -171,6 +176,25 @@ class _DetayScreenState extends State<DetayScreen> {
                 ),
               ),
             )));
+  }
+
+  String? imagePath = null;
+  Future<void> selectImageFromGallery() async {
+    XFile? _file = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, maxHeight: 300, maxWidth: 300);
+    if (_file != null) {
+      imagePath = _file.path;
+      setState(() {});
+    }
+  }
+
+  Future<void> selectImageFromCamera() async {
+    XFile? _file = await ImagePicker()
+        .pickImage(source: ImageSource.camera, maxHeight: 300, maxWidth: 300);
+    if (_file != null) {
+      imagePath = _file.path;
+      setState(() {});
+    }
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -202,22 +226,28 @@ class _DetayScreenState extends State<DetayScreen> {
                                 onTap: () {
                                   selectImage(context);
                                 },
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "http://via.placeholder.com/200x150",
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                )),
+                                child: imagePath != null
+                                    ? Image.file(
+                                        File(imagePath!),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl:
+                                            "http://via.placeholder.com/200x150",
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
+                                          ),
+                                        ),
+                                        placeholder: (context, url) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
+                                      )),
                           ))),
                       Padding(
                         padding: EdgeInsets.all(5),
