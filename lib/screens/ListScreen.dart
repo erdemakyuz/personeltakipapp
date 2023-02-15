@@ -110,9 +110,6 @@ class _ListScreenState extends State<ListScreen> {
                       key: Key(index.toString()),
                       direction: Axis.horizontal,
                       endActionPane: ActionPane(
-                        dismissible: DismissiblePane(
-                          onDismissed: () {},
-                        ),
                         motion: ScrollMotion(),
                         children: [
                           SlidableAction(
