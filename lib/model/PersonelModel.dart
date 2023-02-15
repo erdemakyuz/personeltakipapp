@@ -52,8 +52,10 @@ class PersonelModel {
                       child: RESIMYOLU == null
                           ? Container(width: 50)
                           : Container(
-                              width: 250,
+                              width: 200,
                               decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 2, color: Colors.blue),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                   image: DecorationImage(
