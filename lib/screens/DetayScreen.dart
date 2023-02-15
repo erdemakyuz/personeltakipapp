@@ -11,6 +11,7 @@ import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 import 'package:personeltakipapp/helpers/UtilsHelper.dart';
 import 'package:personeltakipapp/model/PersonelModel.dart';
+import 'package:personeltakipapp/screens/PDFViewerScreen.dart';
 
 class DetayScreen extends StatefulWidget {
   final PersonelModel? PersonelItem;
@@ -346,6 +347,19 @@ class _DetayScreenState extends State<DetayScreen> {
                               labelText: 'Cep Telefonu',
                               prefixIcon: Icon(Icons.phone)),
                         ),
+                      ),
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          PDFViewerScreen())));
+                            },
+                            child: Text("Aydınlatma Metni")),
                       ),
                       SizedBox(height: 20),
                       Container(
