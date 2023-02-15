@@ -106,6 +106,9 @@ class DBHelper {
     var batch = db?.batch();
     for (var model in personelList) {
       batch?.insert("PERSONEL", model.toMap());
+      //batch?.update("PERSONEL", model.toMap());
+      //batch?.delete("PERSONEL", model.toMap());
+      //batch?.execute("delete from personel where ID=1");
     }
     await batch?.commit(exclusive: true, continueOnError: true, noResult: true);
   }
