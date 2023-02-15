@@ -100,6 +100,16 @@ class DBHelper {
     return await db?.delete("PERSONEL", where: "ID= ?", whereArgs: [model.ID]);
   }
 
+  //BULK INSERT-UPDATE-DELETE işlemlerinin daha hızlı yapılabilmesi için SQLLITE batch özelliğini kullanıyoruz.
+  void batchTest(List<PersonelModel> personelList) async {
+    Database? db = await this.db;
+    var batch = db?.batch();
+    for (var model in personelList) {
+      batch?.insert("PERSONEL", model.toMap());
+    }
+    await batch?.commit(exclusive: true, continueOnError: true, noResult: true);
+  }
+
   Future<List<PersonelModel>> getPersonelList() async {
     List<PersonelModel> liste = List<PersonelModel>.empty(growable: true);
     Database? db = await this.db;
