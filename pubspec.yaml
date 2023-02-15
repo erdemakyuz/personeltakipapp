@@ -46,6 +46,7 @@ dependencies:
   url_launcher: ^6.1.9
   qr_flutter: ^4.0.0
   flutter_slidable: ^2.0.0
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

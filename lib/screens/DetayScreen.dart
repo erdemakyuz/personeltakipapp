@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -120,6 +122,38 @@ class _DetayScreenState extends State<DetayScreen> {
     }
   }
 
+  void selectImage(BuildContext ctx) {
+    showCupertinoDialog(
+        context: ctx,
+        barrierDismissible: true,
+        builder: (builder) => Align(
+            alignment: Alignment.bottomCenter,
+            child: CupertinoActionSheet(
+              message: Text("Lütfen seçim yapınız !"),
+              actions: [
+                CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text('Galeri')),
+                CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text('Kamera')),
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: Text(
+                  'Vazgeç',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            )));
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -138,6 +172,34 @@ class _DetayScreenState extends State<DetayScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      Container(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Center(
+                              child: Container(
+                            color: Colors.yellow,
+                            width: 200,
+                            height: 150,
+                            child: GestureDetector(
+                                onTap: () {
+                                  selectImage(context);
+                                },
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "http://via.placeholder.com/200x150",
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                )),
+                          ))),
                       Padding(
                         padding: EdgeInsets.all(5),
                         child: TextFormField(
