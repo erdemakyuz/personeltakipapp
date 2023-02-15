@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/helpers/DateHelper.dart';
 import 'package:personeltakipapp/helpers/UtilsHelper.dart';
@@ -122,7 +123,25 @@ class _DetayScreenState extends State<DetayScreen> {
     }
   }
 
-  void selectImage(BuildContext ctx) {
+  Future<void> selectImage(BuildContext ctx) async {
+    //Yetki Kontrolü Yaptığımız YEr
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.camera,
+      Permission.storage,
+    ].request();
+    if ((statuses[Permission.camera] == PermissionStatus.denied ||
+            statuses[Permission.camera] ==
+                PermissionStatus.permanentlyDenied) ||
+        (statuses[Permission.storage] == PermissionStatus.denied ||
+            statuses[Permission.storage] ==
+                PermissionStatus.permanentlyDenied)) {
+      openAppSettings();
+    } else {
+      showSecim(ctx);
+    }
+  }
+
+  void showSecim(BuildContext ctx) {
     showCupertinoDialog(
         context: ctx,
         barrierDismissible: true,
