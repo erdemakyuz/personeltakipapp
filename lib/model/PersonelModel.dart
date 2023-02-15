@@ -51,7 +51,14 @@ class PersonelModel {
                       width: 150,
                       child: RESIMYOLU == null
                           ? Container(width: 50)
-                          : Image.file(File(RESIMYOLU!), fit: BoxFit.cover)),
+                          : Container(
+                              width: 250,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(File(RESIMYOLU!)))))),
                   Expanded(
                       child: Container(
                           padding: EdgeInsets.all(15),
