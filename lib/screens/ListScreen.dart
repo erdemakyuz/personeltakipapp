@@ -118,7 +118,8 @@ class _ListScreenState extends State<ListScreen> {
                           SlidableAction(
                             padding: EdgeInsets.all(20.0),
                             onPressed: (BuildContext ctx) {
-                              personelSil(personelListe![index], index);
+                              personelSil(
+                                  personelListe![index], index, context);
                             },
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
@@ -147,11 +148,32 @@ class _ListScreenState extends State<ListScreen> {
     );
   }
 
-  void personelSil(PersonelModel model, int index) {
-    DBHelper().deletePersonel(model).then((value) {
-      personelListe!.removeAt(index);
-      setState(() {});
-    });
+  void personelSil(PersonelModel model, int index, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Burulaş Personel Takip'),
+            content: Text(
+                'Personel [${model.ADISOYADI}] kaydını silmek istediğinizden emin misiniz?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Vazgeç')),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    DBHelper().deletePersonel(model).then((value) {
+                      personelListe!.removeAt(index);
+                      setState(() {});
+                    });
+                  },
+                  child: Text('Evet, Sil'))
+            ],
+          );
+        });
   }
 
   Future<void> openDetayScreen(
