@@ -122,4 +122,15 @@ class DBHelper {
     });
     return liste;
   }
+
+  Future<PersonelModel?> getPersonel(String TCKIMLIKNO) async {
+    PersonelModel? model = null;
+    Database? db = await this.db;
+    var result = await db?.rawQuery(
+        "select * from PERSONEL WHERE TCKIMLIKNO='$TCKIMLIKNO' order BY ID DESC");
+    result?.forEach((element) {
+      model = PersonelModel.fromObject(element);
+    });
+    return model;
+  }
 }

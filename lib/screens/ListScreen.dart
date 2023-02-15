@@ -85,7 +85,14 @@ class _ListScreenState extends State<ListScreen> {
     String result = await FlutterBarcodeScanner.scanBarcode(
         "#ff6666", "Vazgeç", true, ScanMode.QR);
     if (result.isNotEmpty) {
-      print(result);
+      var model = await DBHelper().getPersonel(result);
+      if (model != null) {
+        openDetayScreen(context, model);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Personel bilgisi bulunamadı !'),
+        ));
+      }
     }
   }
 
