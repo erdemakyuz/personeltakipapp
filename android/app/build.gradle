@@ -51,6 +51,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        //Hata Alındığında ekleniyor: The number of method references in a .dex file cannot exceed 64K.
+        multiDexEnabled true
     }
 
     buildTypes {
