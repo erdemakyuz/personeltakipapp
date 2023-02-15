@@ -94,6 +94,12 @@ class DBHelper {
         "PERSONEL", where: "ID= ?", whereArgs: [model.ID], model.toMap());
   }
 
+  Future<int?> deletePersonel(PersonelModel model) async {
+    Database? db = await this.db;
+    //db.execute("delete from Personel where ID=1");
+    return await db?.delete("PERSONEL", where: "ID= ?", whereArgs: [model.ID]);
+  }
+
   Future<List<PersonelModel>> getPersonelList() async {
     List<PersonelModel> liste = List<PersonelModel>.empty(growable: true);
     Database? db = await this.db;

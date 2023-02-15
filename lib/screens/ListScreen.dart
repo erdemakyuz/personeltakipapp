@@ -116,7 +116,10 @@ class _ListScreenState extends State<ListScreen> {
                         motion: ScrollMotion(),
                         children: [
                           SlidableAction(
-                            onPressed: (BuildContext ctx) {},
+                            padding: EdgeInsets.all(20.0),
+                            onPressed: (BuildContext ctx) {
+                              personelSil(personelListe![index], index);
+                            },
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             icon: Icons.delete,
@@ -142,6 +145,13 @@ class _ListScreenState extends State<ListScreen> {
             child: Icon(Icons.add)),
       ),
     );
+  }
+
+  void personelSil(PersonelModel model, int index) {
+    DBHelper().deletePersonel(model).then((value) {
+      personelListe!.removeAt(index);
+      setState(() {});
+    });
   }
 
   Future<void> openDetayScreen(
