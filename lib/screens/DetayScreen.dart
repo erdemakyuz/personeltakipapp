@@ -29,6 +29,7 @@ class _DetayScreenState extends State<DetayScreen> {
       adSoyadController.text = PersonelItem?.ADISOYADI ?? "";
       cinsiyetController.text = PersonelItem?.CINSIYET ?? "";
       telefonController.text = PersonelItem?.TELEFON ?? "";
+      imagePath = PersonelItem?.RESIMYOLU;
       if (PersonelItem?.DOGUMTARIHI != null) {
         dogumTarihiController.text =
             DateHelper.GetString(PersonelItem!.DOGUMTARIHI!, "dd.MM.yyyy");
@@ -103,6 +104,7 @@ class _DetayScreenState extends State<DetayScreen> {
       model.TELEFON = telefonController.text;
       model.DOGUMTARIHI = selectedDate;
       model.CINSIYET = cinsiyetController.text;
+      model.RESIMYOLU = imagePath;
 
       if (this.PersonelItem != null) {
         DBHelper().updatePersonel(model).then((value) {
