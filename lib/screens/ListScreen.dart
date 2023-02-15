@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:personeltakipapp/helpers/DBHelper.dart';
 import 'package:personeltakipapp/model/PersonelModel.dart';
 import 'package:personeltakipapp/screens/DetayScreen.dart';
@@ -105,7 +106,25 @@ class _ListScreenState extends State<ListScreen> {
                   onLongPress: () {
                     showActionSheet(context, personelListe![index]);
                   },
-                  child: personelListe![index].toView());
+                  child: Slidable(
+                      key: Key(index.toString()),
+                      direction: Axis.horizontal,
+                      endActionPane: ActionPane(
+                        dismissible: DismissiblePane(
+                          onDismissed: () {},
+                        ),
+                        motion: ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (BuildContext ctx) {},
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            icon: Icons.delete,
+                            label: 'Personel Sil',
+                          )
+                        ],
+                      ),
+                      child: personelListe![index].toView()));
             },
             separatorBuilder: (sep, index) {
               return Divider();
