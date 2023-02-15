@@ -44,31 +44,36 @@ class PersonelModel {
     return Container(
         padding: EdgeInsets.all(10),
         child: Card(
-            child: Row(children: [
-          Container(
-              width: 100,
-              child: RESIMYOLU == null
-                  ? Container()
-                  : Image.file(File(RESIMYOLU!), fit: BoxFit.cover)),
-          Container(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(ADISOYADI ?? "",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.blue)),
-                    SizedBox(height: 10),
-                    Text(TCKIMLIKNO ?? ""),
-                    SizedBox(height: 10),
-                    Text(CINSIYET ?? ""),
-                    SizedBox(height: 10),
-                    Text(DOGUMTARIHI == null
-                        ? ""
-                        : DateHelper.GetString(DOGUMTARIHI!, "dd.MM.yyyy"))
-                  ]))
-        ])));
+            child: Container(
+                height: 150,
+                child: Row(children: [
+                  Container(
+                      width: 150,
+                      child: RESIMYOLU == null
+                          ? Container(width: 50)
+                          : Image.file(File(RESIMYOLU!), fit: BoxFit.cover)),
+                  Expanded(
+                      child: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(ADISOYADI ?? "",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue)),
+                                SizedBox(height: 10),
+                                Text(TCKIMLIKNO ?? ""),
+                                SizedBox(height: 10),
+                                Text(CINSIYET ?? ""),
+                                SizedBox(height: 10),
+                                Text(DOGUMTARIHI == null
+                                    ? ""
+                                    : DateHelper.GetString(
+                                        DOGUMTARIHI!, "dd.MM.yyyy"))
+                              ])))
+                ]))));
   }
 }
