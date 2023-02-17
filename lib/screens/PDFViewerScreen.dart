@@ -20,6 +20,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
     setState(() => isLoading = false);
   }
 
+  //Fix
   @override
   void initState() {
     super.initState();
